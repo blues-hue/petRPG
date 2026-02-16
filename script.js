@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentUser = null;
     let currentStep = 1;
 
+    let userLvl = 1;
     const variables = {}; // join back meeting u disconnected
 
 
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             init: function () {
                 this.appendDummyInput()
                     .appendField("feed ")
-                    .appendField(new Blockly.FieldNumber(0, 0, variables["currentFood"]), "days")
+                    .appendField(new Blockly.FieldNumber(0, 0, variables["currentFood"]), "times")
                     .appendField("times");
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
@@ -254,16 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const genericContent = document.getElementById('generic-content');
         const modalPetSprite = document.getElementById('modal-pet-sprite');
 
-        /*
-script.js:310 Uncaught TypeError: Cannot read properties of null (reading 'style')
-    at updateStat (script.js:310:45)
-    at syncUIWithVariables (script.js:275:17)
-    at openModal (script.js:270:13)
-    at script.js:246:17
-    at Array.forEach (<anonymous>)
-    at checkStationInteraction (script.js:243:18)
-    at handleInput (script.js:235:13)
-        */
         if (title.toLowerCase() === 'vet') {
             vetContent.style.display = 'flex';
             genericContent.style.display = 'none';
@@ -297,6 +288,10 @@ script.js:310 Uncaught TypeError: Cannot read properties of null (reading 'style
                     scrollbars: true,
                     trashcan: true
                 });
+                if (title === "Vet") {
+                    const newToolbox = document.getElementById("vetToolbox");
+                    workspace.updateToolbox(newToolbox);
+                }
             }
 
 
@@ -431,4 +426,9 @@ script.js:310 Uncaught TypeError: Cannot read properties of null (reading 'style
         showScreen('auth');
     });
 
+
+    //blockly funcs
+    function feedPet(times){
+        variables["hunger"] += (times * 0.1) / (1 + (userLvl * 0.05));
+    }
 });
