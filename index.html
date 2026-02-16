@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetRPG</title>
+    <meta name="description" content="A game for TJFBLA Intro to Programming 2026.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+
+        <section id="auth-screen" class="view active">
+            <div class="glass-card fade-in">
+                <h1>PetRPG (we can change the name if u want)</h1>
+                <p class="subtitle">Sign in</p>
+                <div class="input-group">
+                    <input type="text" id="username-input" placeholder="What's your name?" autocomplete="off">
+                </div>
+                <button id="login-btn" class="primary-btn">Start game</button>
+            </div>
+        </section>
+
+
+
+        <section id="onboarding-screen" class="view">
+            <div class="glass-card fade-in">
+                <h2>Choose your pet</h2>
+                <div id="onboarding-steps">
+                    <div class="step active" data-step="1">
+                        <p>What is your pet's name?</p>
+                        <input type="text" id="q1" placeholder="e.g. bob">
+                    </div>
+                    <div class="step" data-step="2">
+                        <p>Choose your companion</p>
+                        <div class="pet-selection-grid"
+                            style="display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0;">
+                            <label class="pet-card">
+                                <input type="radio" name="pet-choice" value="cat" class="pet-radio">
+                                <div class="pet-card-content">
+                                    <div class="pet-icon"></div>
+                                    <span>Cat</span>
+                                </div>
+                            </label>
+                            <label class="pet-card">
+                                <input type="radio" name="pet-choice" value="dog" class="pet-radio">
+                                <div class="pet-card-content">
+                                    <div class="pet-icon"></div>
+                                    <span>Dog</span>
+                                </div>
+                            </label>
+                            <label class="pet-card">
+                                <input type="radio" name="pet-choice" value="rabbit" class="pet-radio">
+                                <div class="pet-card-content">
+                                    <div class="pet-icon"></div>
+                                    <span>Rabbit</span>
+                                </div>
+                            </label>
+                        </div>
+                        <input type="hidden" id="q2">
+                    </div>
+                    <div class="step" data-step="3">
+                        <p>You're ready to start!</p>
+                        <button id="finish-onboarding" class="primary-btn">Create Account</button>
+                    </div>
+                </div>
+                <div class="step-controls">
+                    <button id="next-step" class="secondary-btn">Next</button>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="game-screen" class="view">
+            <div class="game-ui">
+                <div class="user-badge">
+                    <p>Hello, </p>
+                    <span id="display-name"></span>
+                    <button id="logout-btn">log out</button>
+                </div>
+                <div class="controls-hint">use WASD or arrow keys to move around!</div>
+            </div>
+
+            <div class="world-viewport">
+                <div class="world-grid"></div>
+                <div id="obstacles-container"></div>
+                <div id="stations-container"></div>
+                <div id="character" class="pixel-human"></div>
+                <div id="pet" class="pet cat"></div>
+            </div>
+        </section>
+    </div>
+
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="close-modal">&times;</button>
+            <h2 id="modal-title">Station</h2>
+            <div id="vet-content" class="vet-interface" style="display: none;">
+                <div class="left-panel">
+                    <div class="modal-pet-display">
+                        <div id="modal-pet-sprite" class="pet"></div>
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <label>Happiness</label>
+                            <div class="bar-bg">
+                                <div id="bar-happiness" class="bar-fill"></div>
+                            </div>
+                            <div id="val-happiness" class="stat-val">0 / 100</div>
+                        </div>
+                        <div class="stat-item">
+                            <label>Hunger</label>
+                            <div class="bar-bg">
+                                <div id="bar-hunger" class="bar-fill"></div>
+                            </div>
+                            <div id="val-hunger" class="stat-val">0 / 100</div>
+                        </div>
+                        <div class="stat-item">
+                            <label>Hygiene</label>
+                            <div class="bar-bg">
+                                <div id="bar-hygiene" class="bar-fill"></div>
+                            </div>
+                            <div id="val-hygiene" class="stat-val">0 / 100</div>
+                        </div>
+                        <div class="stat-item">
+                            <label>Money</label>
+                            <div class="bar-bg">
+                                <div id="bar-money" class="bar-fill"></div>
+                            </div>
+                            <div id="val-money" class="stat-val">$0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-panel">
+                    <h3>Pet Logic Editor</h3>
+                    <div class="block-editor">
+                        <p>(we gotta add the code thingy here)</p>
+                    </div>
+                    <button id="execute-btn" class="primary-btn">Execute Logic</button>
+                </div>
+            </div>
+            <div id="generic-content">
+                <p>Coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

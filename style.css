@@ -1,0 +1,500 @@
+:root {
+    --bg-color: #050505;
+    --accent-primary: #7c3aed;
+    --accent-secondary: #22d3ee;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glow: 0 0 20px rgba(124, 58, 237, 0.5);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.view {
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.view.active {
+    display: flex;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 3rem;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    /* background: linear-gradient(to right, #fff, var(--accent-secondary)); */
+    background: var(--accent-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* Inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: var(--accent-primary);
+}
+
+/* Inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.primary-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-secondary);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.primary-btn:hover {
+    filter: brightness(1.1);
+}
+
+.secondary-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Onboarding Steps */
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Game World 2D */
+#game-screen {
+    position: relative;
+    background: #0a0a0a;
+}
+
+.world-viewport {
+    width: 90vw;
+    height: 70vh;
+    background: #111;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.world-grid {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image:
+        linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+}
+
+.pixel-human {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    margin-left: -16px;
+    /* - (width of sprite / 2) */
+    margin-top: -24px;
+    /* - (height of sprite / 2) */
+    z-index: 10;
+    /* Pixel Art Construction */
+    /* Hair */
+    box-shadow:
+        8px 0 #4b2c20, 12px 0 #4b2c20, 16px 0 #4b2c20, 20px 0 #4b2c20,
+        8px 4px #4b2c20, 12px 4px #4b2c20, 16px 4px #4b2c20, 20px 4px #4b2c20,
+        /* Skin (Face) */
+        8px 8px #e5c1a0, 12px 8px #e5c1a0, 16px 8px #e5c1a0, 20px 8px #e5c1a0,
+        8px 12px #e5c1a0, 12px 12px #e5c1a0, 16px 12px #e5c1a0, 20px 12px #e5c1a0,
+        /* Arms & Torso */
+        0 16px #e5c1a0, 4px 16px #22d3ee, 8px 16px #22d3ee, 12px 16px #22d3ee, 16px 16px #22d3ee, 20px 16px #22d3ee, 24px 16px #22d3ee, 28px 16px #e5c1a0,
+        0 20px #e5c1a0, 4px 20px #22d3ee, 8px 20px #22d3ee, 12px 20px #22d3ee, 16px 20px #22d3ee, 20px 20px #22d3ee, 24px 20px #22d3ee, 28px 20px #e5c1a0,
+        0 24px #e5c1a0, 8px 24px #22d3ee, 12px 24px #22d3ee, 16px 24px #22d3ee, 20px 24px #22d3ee, 28px 24px #e5c1a0,
+        8px 28px #22d3ee, 12px 28px #22d3ee, 16px 28px #22d3ee, 20px 28px #22d3ee,
+        /* Pants */
+        8px 32px #333, 12px 32px #333, 16px 32px #333, 20px 32px #333,
+        8px 36px #333, 12px 36px #333, 16px 36px #333, 20px 36px #333,
+        8px 40px #333, 20px 40px #333,
+        /* Shoes */
+        8px 44px #111, 20px 44px #111;
+}
+
+/* Pets Base */
+.pet {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    z-index: 9;
+    transition: left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.pet.cat {
+    box-shadow:
+        4px 0 #fbbf24, 12px 0 #fbbf24,
+        0 4px #fbbf24, 4px 4px #fbbf24, 8px 4px #fbbf24, 12px 4px #fbbf24, 16px 4px #fbbf24,
+        0 8px #fbbf24, 4px 8px #000, 8px 8px #fbbf24, 12px 8px #000, 16px 8px #fbbf24,
+        0 12px #fbbf24, 4px 12px #fbbf24, 8px 12px #fbbf24, 12px 12px #fbbf24, 16px 12px #fbbf24,
+        4px 16px #fbbf24, 12px 16px #fbbf24;
+}
+
+.pet.dog {
+    box-shadow:
+        4px 0 #78350f, 12px 0 #78350f,
+        0 4px #a8a29e, 4px 4px #a8a29e, 8px 4px #a8a29e, 12px 4px #a8a29e, 16px 4px #a8a29e,
+        0 8px #a8a29e, 4px 8px #000, 8px 8px #a8a29e, 12px 8px #000, 16px 8px #a8a29e,
+        0 12px #a8a29e, 4px 12px #a8a29e, 8px 12px #a8a29e, 12px 12px #a8a29e, 16px 12px #a8a29e,
+        4px 16px #a8a29e, 12px 16px #a8a29e;
+}
+
+.pet.rabbit {
+    box-shadow:
+        4px -4px #e5e7eb, 12px -4px #e5e7eb,
+        4px 0 #e5e7eb, 12px 0 #e5e7eb,
+        4px 4px #e5e7eb, 8px 4px #e5e7eb, 12px 4px #e5e7eb,
+        4px 8px #e5e7eb, 8px 8px #f472b6, 12px 8px #e5e7eb,
+        4px 12px #e5e7eb, 8px 12px #e5e7eb, 12px 12px #e5e7eb,
+        4px 16px #e5e7eb, 12px 16px #e5e7eb;
+}
+
+/* Trees */
+.tree {
+    position: absolute;
+    width: 24px;
+    height: 36px;
+    z-index: 5;
+    background: transparent;
+}
+
+.tree::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    pointer-events: none;
+    box-shadow:
+        /* Leaves */
+        8px 0 #065f46, 12px 0 #065f46, 16px 0 #065f46,
+        4px 4px #065f46, 8px 4px #065f46, 12px 4px #065f46, 16px 4px #065f46, 20px 4px #065f46,
+        0 8px #059669, 4px 8px #059669, 8px 8px #059669, 12px 8px #059669, 16px 8px #059669, 20px 8px #059669, 24px 8px #059669,
+        0 12px #059669, 4px 12px #059669, 8px 12px #059669, 12px 12px #059669, 16px 12px #059669, 20px 12px #059669, 24px 12px #059669,
+        4px 16px #10b981, 8px 16px #10b981, 12px 16px #10b981, 16px 16px #10b981, 20px 16px #10b981,
+        8px 20px #10b981, 12px 20px #10b981, 16px 20px #10b981,
+        /* Trunk */
+        10px 24px #4b2c20, 14px 24px #4b2c20,
+        10px 28px #4b2c20, 14px 28px #4b2c20,
+        10px 32px #4b2c20, 14px 32px #4b2c20;
+}
+
+/* Game UI */
+.game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-badge {
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#logout-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.controls-hint {
+    position: absolute;
+    bottom: 4rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    opacity: 0.5;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease;
+}
+
+/* Stations - High School Style */
+.station {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #334155;
+    border: 4px solid #475569;
+    border-radius: 0px;
+    /* Square and basic */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.station-label {
+    /* Label is now just text inside */
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Modal UI */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #e0e0e0;
+    /* Simple gray */
+    border: 5px solid #000;
+    padding: 10px;
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    font-family: 'Arial', sans-serif;
+}
+
+.close-modal {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    background: #ff0000;
+    border: 2px solid black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px 10px;
+}
+
+.vet-interface {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex: 1;
+    min-height: 0;
+}
+
+.left-panel,
+.right-panel {
+    flex: 1;
+    background: #fff;
+    border: 2px solid #000;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-container {
+    margin-top: 10px;
+}
+
+.stat-item {
+    margin-bottom: 20px;
+}
+
+.stat-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.bar-bg {
+    width: 100%;
+    height: 30px;
+    background: #ccc;
+    border: 2px solid #000;
+}
+
+.bar-fill {
+    height: 100%;
+}
+
+#bar-happiness {
+    background: green;
+}
+
+#bar-hunger {
+    background: red;
+}
+
+#bar-hygiene {
+    background: blue;
+}
+
+#bar-money {
+    background: gold;
+}
+
+.stat-val {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.modal-pet-display {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    border: 2px solid #000;
+    margin-bottom: 10px;
+}
+
+.modal-pet-display .pet {
+    position: relative;
+    transform: scale(5);
+    animation: none !important;
+}
+
+.block-editor {
+    flex-grow: 1;
+    background: #fff;
+    border: 2px solid #000;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
