@@ -1,5 +1,6 @@
 # TJHSST FBLA 2026 Intro to Programming
 
+
 # petRPG
 
 * This is petRPG, a game for TJFBLA Intro to Programming 2026 where users move around a grid and enter stations to make scheduling commands to take care of the pet.
@@ -63,6 +64,10 @@
 * Analytical Report: After every day simulation, a report shows how all your global variables changed and updated as consequences of your actions.
 
 ---
+# How to run the game:
+* The game is web-based. Open the project in Visual Studio Code. Use a local host or the Live Server VS Code extension, and create it for the HTML file.
+* From there, you will be prompted to make an account with a name, a pet name, and a certain pet (dog, cat, or rabbit).
+* After these steps, you are all set! Make sure you read the Q&A and use the AI chatbot using the Groq API if you have any extra questions on how to play.
 
 ## Credits
 
