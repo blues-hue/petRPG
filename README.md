@@ -34,6 +34,7 @@
  * This game is all about logical planning and scheduling a day for the future. A running total of all your expenses is in the "status section".
 
 * To increase these variables, a user has to use block logic to plan their day, which teaches the user how to logically think along with planning for the future.
+* Each simulation (i.e. each time you click "Execute All") is one full level.
 
 ---
 
@@ -43,6 +44,7 @@
 * Use Blockly blocks to create actions (you are “programming” the day).
 * Your planned actions are saved and shown in the Scheduled Actions sidebar.
 * Press "Execute All" to simulate a day and run everything you scheduled across all stations.
+* You are limited to 10 code blocks per simulation.
 
 ---
 
