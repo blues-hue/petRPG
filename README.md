@@ -88,4 +88,5 @@
 * Groq API for AI Interactive Q&A feature
 * Visual Studio Code
 * Github (this app!)
+* HTML Template: https://gist.github.com/MrChuffmanSnippets/2043416
 
